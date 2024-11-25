@@ -1,3 +1,9 @@
+
+ on: [push, pull_request, workflow_dispatch]
+
+ jobs:
+   build:
+     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
 # This file generates the GitHub Actions matrix.
 # For simple board + shield combinations, add them to the top level board and
 # shield arrays, for more control, add individual board + shield combinations
@@ -24,3 +30,6 @@ include:
     shield: sofle_right
   - board: nice_nano_v2
     shield: settings_reset
+
+west build -d build/right -p -b nice_nano_v2 -S zmk-usb-logging -- -DSHIELD=sofle_right -DZMK_CONFIG="/home/sofle/config"
+west build -d build/left -p -b nice_nano_v2 -S zmk-usb-logging -- -DSHIELD=sofle_left -DZMK_CONFIG="/home/sofle/config"
